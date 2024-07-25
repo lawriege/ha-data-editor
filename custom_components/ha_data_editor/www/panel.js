@@ -39,12 +39,16 @@ class HaDataEditorPanel extends HTMLElement {
         // Filters can be added to the table
         this.hot = new Handsontable(container, {
             data: data,
-            colHeaders: ['Name', 'Area'],
+            colHeaders: ['Name', 'Id', 'Area'],
             columns: [
-                // The name column is read-only for now
+                // The name and id columns are read-only for now
                 // The table is by default sorted by this column
                 {
                     data: 'name',
+                    readOnly: true,
+                },
+                {
+                    data: 'id',
                     readOnly: true,
                 },
                 {
@@ -63,7 +67,7 @@ class HaDataEditorPanel extends HTMLElement {
                 }
             },
             manualColumnResize: true,
-            colWidths: [400, 250],
+            colWidths: [400, 200, 250],
             licenseKey: 'non-commercial-and-evaluation',
             afterChange: (changes, source) => {
                 if (source !== 'loadData') {
