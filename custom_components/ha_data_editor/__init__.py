@@ -4,6 +4,7 @@ import os
 
 from homeassistant import config_entries, core
 from homeassistant.components import frontend
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.helpers import device_registry
 
 _LOGGER = logging.getLogger(__name__)
@@ -21,7 +22,7 @@ async def async_setup_entry(
     www_path = os.path.join(current_file_path, "www")
 
     # Register a new static path for serving your custom panel
-    hass.http.register_static_path("/ha-data-editor-www", www_path)
+    await hass.http.async_register_static_paths([StaticPathConfig("/ha-data-editor-www", www_path, True)])
 
     frontend.add_extra_js_url(hass, "/ha-data-editor-www/panel.js")
 
